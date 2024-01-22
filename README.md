@@ -18,10 +18,31 @@ Przed uruchomieniem systemu należy zmienić opcje Adaptera Karty Sieciowej z *N
 ### Pobranie i uruchomienie servera
 Ostanim etapem przygotowawczym będzie skolonowanie i uruchomienie przygotowanego przez nas servera Flask. W dalszych etapach będziemy go modyfikować i wprowadzać dodatkowe zabezpieczenia. 
 ```
+
+sudo apt install git
+sudo apt install python3
+sudo apt install python3-flask
 git clone https://github.com/Nemezjusz/DDoS.git
-flask –app <servername> run --host=0.0.0.0
+
+flask –app server1 run --host=0.0.0.0
 ```
+## Task 1
+> Podstawy ddos
+> napisanie jakiegos pliczku
+> test 
 
-## Task 1 - Przeprowadzenie ataku i analiza 
+## Task 2 - Przeprowadzenie ataku i analiza 
+W tym zadaniu przyda nam się również **Wireshark**. Dzieki niemu bedziemy w stanie obserwować wysyłane i odpierane przez nas pakiety.
+> analiza kodu ddos
+> uruchomienie ddos
+> obserwacja wysyłanych pakietów przez nas i przez server
+>
+> wysłanie ss z wiresharka jako zadanie
 
-## Task 2 - Zapezpieczenie serwera
+## Task 3 - Zapezpieczenie serwera
+
+> edytujemy plik servera
+> wprowadzRate Limiting
+> wprowadzamy capchte
+> powrownujemy wyniki
+
