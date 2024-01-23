@@ -18,31 +18,73 @@ Przed uruchomieniem systemu należy zmienić opcje Adaptera Karty Sieciowej z *N
 ### Pobranie i uruchomienie servera
 Ostanim etapem przygotowawczym będzie skolonowanie i uruchomienie przygotowanego przez nas servera Flask. W dalszych etapach będziemy go modyfikować i wprowadzać dodatkowe zabezpieczenia. 
 ```
-
 sudo apt install git
 sudo apt install python3
-sudo apt install python3-flask
+sudo apt install python3-pip
+sudo apt install python3-venv
+sudo python3 -m -venv ddosvenv
+source ddosvenv/bin/activate
+sudo chmod -R a+rwx ddosvenv
+pip3 install flask
 git clone https://github.com/Nemezjusz/DDoS.git
-
+cd DDos
 flask –app server1 run --host=0.0.0.0
 ```
+Po wpisaniu ostaniej komendy utowożymy serwer dostępny w naszej lokalnej sieci. Znajduje się on pod adresem: `http://<ip_virtualnej_maszyny>:5000`
+
 ## Task 1
 > Podstawy ddos
-> napisanie jakiegos pliczku
-> test 
+> napisanie jakiegos pliczku, najlepiej zeby miał w sobie atak get albo post
+> test
+> jako zadanie wysłąc ssa 
+
 
 ## Task 2 - Przeprowadzenie ataku i analiza 
 W tym zadaniu przyda nam się również **Wireshark**. Dzieki niemu bedziemy w stanie obserwować wysyłane i odpierane przez nas pakiety.
-> analiza kodu ddos
-> uruchomienie ddos
-> obserwacja wysyłanych pakietów przez nas i przez server
->
-> wysłanie ss z wiresharka jako zadanie
+
+Do aktaku możemy wykorzystać wcześniej napisany kod, lub gotowy program znajdujący się w pliku dos.py. Przed odpaleniem ataku należy przeanalizować kod i porównać go z napisanym przez siebie.
+W przypadku używania gotowego programu poprosi on nas o wybranie typu ataku. 
+
+### Atak GET
+Zaczniemy od wyboru ataku typu **GET**. Kolejną zmienną jaką musimy wybrać jest ilość wątków. Tutaj sprawa nieco się komplikuje. 
+Aby osiągnąć porządany efekt musimy wysłać do servera tyle zapytań aby nie było w stanie odpowiedzeć. Tutaj w zależności jakie parametry nadliśmy VMowi ilość wątków może być w tysiącach. Im więcej wybierzemy tym lepiej zauważmy wyniki w postaci wydłużenia czasu odpowidzi serwera.
+
+![obraz](https://github.com/Nemezjusz/DDoS/assets/50834734/ed5ba84f-a3c2-4f7a-bb17-977728044dc7)
+
+W Wiresharku możemy zaobserwować ogromne ilości pakietów GET wysyłanych do i z serwera. Informacje tę możemy również zobaczyć w terminalu serwera.
+Wchodząc w *Statystyki* > *IPv4 Statistic* > *All Addresses* możemy zauważyć ilość, rate oraz burst wysyłanych i otrzymywanych danych.
+
+![obraz](https://github.com/Nemezjusz/DDoS/assets/50834734/84bad358-8358-4697-b64d-2107aae12c2d)
+
+### Atak POST
+W podobny sposów możemy przeprowadzić atak **POST**. Potrzebne będą nam jedynie małe zmiany na serwerze, aby mógł on takie zapytania przyjmować. 
+Wystarczy, wyłączymy pierwszy serwer za pomocą kombinacji klawiszy *Ctrl+C* i włączymy nowy za pomocą komendy: 
+
+`flask –app server2 run --host=0.0.0.0`
+
+### Pozostałe ataki
+W ramach ćwiczenia możesz przetestować reszte dostępnych ataków. Każdy z nich różni się podejściem i rodzajem wysyłanych pakietów. Pamiętaj że najlepsze ataki są dobrane pod konkretny cel!
+
+### TODO
+W ramch zadania wyślij SSa Statystyk Wiresharka z dowlnego ataku.
+
 
 ## Task 3 - Zapezpieczenie serwera
+W tej części zabezpieczymy serwer od strony aplikacji. Zabezpieczenia takie pozwalają załagodzić ataki a niektórych kompletnie uniknąć. Zabezpieczenia te możemy podzielić na trzy główne kategorie - Request Rate Limiting, Request Rate Limiting oraz Web Application Firewall. Skupimy się na pierwszym z nich.
 
-> edytujemy plik servera
-> wprowadzRate Limiting
-> wprowadzamy capchte
-> powrownujemy wyniki
+### Request Rate Limiting
+
+Ograniczanie liczby żądań (Request rate limiting) to istotny element skutecznej strategii obrony przed atakami DDoS. Polega to na ustawieniu limitu liczby żądań, jakie serwer może przyjąć w określonym czasie. Na przykład, zakładając, że normalny użytkownik nie może przesyłać szczegółów logowania więcej niż pięć razy na sekundę, możemy zdecydować, że jeśli użytkownik wysyła żądania częściej, jest to prawdopodobnie próba ataku. Następnie możemy ustawić limit liczby żądań dla punktu końcowego API logowania na pięć na sekundę i zablokować każdy adres IP klienta, który narusza tę zasadę.
+
+Do wprowadzenia ograniczenia żądań na naszym serwerze użyjemy **flask_limiter**. Aby go zainstalować użyj komendy:
+
+```pip3 install flask_limiter```
+
+Przykład użycia możemy zobaczyć na stronie: 
+> https://flask-limiter.readthedocs.io/en/stable/
+
+### TODO
+Za pomocą komendy `nano` lub dowolnego innego edytora wprowadź do pliku server1.py ograniczenie **1 zapytania na 2 sekundy**.
+
+Teraz możemy ponownie przeprowadzić wybrany atak i porównać czas odpowiedzi serwera jak i ilość otrzymywanych pakietów (np. GET)
 
