@@ -1,18 +1,23 @@
-from flask import Flask, render_template
-import time
-app = Flask(__name__)
+import os.path
+from flask import Flask, render_template, request
+import datetime
 
+app = Flask(__name__)
 def do_someting():
     x = 150*32
-    x = x^23
+    x = x^44
 
-    return time.time()
-
+    return datetime.datetime.now()
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    login = request.form.get('login')
+    do_someting()
 
-    tx = do_someting()
+    if login is None:
+        return render_template("time.html")
+    else:
+        return render_template("welcome.html", login=login)
 
-    return render_template("main2.html", text = tx)
+
 
 
