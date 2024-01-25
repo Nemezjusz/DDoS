@@ -33,10 +33,7 @@ flask –app server1 run --host=0.0.0.0
 Po wpisaniu ostaniej komendy utowożymy serwer dostępny w naszej lokalnej sieci. Znajduje się on pod adresem: `http://<ip_virtualnej_maszyny>:5000`
 
 ## Task 1
-> Podstawy ddos
-> napisanie jakiegos pliczku, najlepiej zeby miał w sobie atak get albo post
-> test
-> jako zadanie wysłąc ssa 
+W celu zrozumienia na jakiej zasadzie działają ataki dos w zadaniu pierwszym będziemy musieli napisać prosty atak dos w języku Python, który będzie symulował prosty atak DoS na serwer za pomocą zapytań GET lub POST. Możesz posłużyć sie już zaimplementowanym atakiem dos (Atak dso)[]
 
 
 ## Task 2 - Przeprowadzenie ataku i analiza 
