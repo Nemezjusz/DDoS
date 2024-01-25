@@ -33,8 +33,8 @@ flask –app server1 run --host=0.0.0.0
 Po wpisaniu ostaniej komendy utowożymy serwer dostępny w naszej lokalnej sieci. Znajduje się on pod adresem: `http://<ip_virtualnej_maszyny>:5000`
 
 ## Task 1
-W celu zrozumienia na jakiej zasadzie działają ataki dos w zadaniu pierwszym będziemy musieli napisać prosty atak dos w języku Python, który będzie symulował prosty atak DoS na serwer za pomocą zapytań GET lub POST. 
->Możesz posłużyć sie już zaimplementowanym atakiem dos którego używamy w programie.
+W celu zrozumienia na jakiej zasadzie działają ataki dos w zadaniu pierwszym będziemy musieli napisać prosty atak dos w języku Python, który będzie symulował prosty atak DoS na serwer za pomocą zapytań GET lub POST. Chodzi o to aby za pomocą np metody GET powodować ciągłe i równoczesne wysyłanie zapytań na docelowy adres URL serwera, co może prowadzić do przeciążenia serwera i utraty dostępności. 
+>Możesz wspomóc sie już zaimplementowanym atakiem dos którego używamy w programie.
 
 >Link --> [dos.py](https://github.com/Nemezjusz/DDoS/blob/main/dos.py)
 
