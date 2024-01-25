@@ -34,8 +34,9 @@ Po wpisaniu ostaniej komendy utowożymy serwer dostępny w naszej lokalnej sieci
 
 ## Task 1
 W celu zrozumienia na jakiej zasadzie działają ataki dos w zadaniu pierwszym będziemy musieli napisać prosty atak dos w języku Python, który będzie symulował prosty atak DoS na serwer za pomocą zapytań GET lub POST. 
-Możesz posłużyć sie już zaimplementowanym atakiem dos 
-(Atak dso)[dos.py]
+>Możesz posłużyć sie już zaimplementowanym atakiem dos którego używamy w programie.
+
+>Link --> [dos.py](https://github.com/Nemezjusz/DDoS/blob/main/dos.py)
 
 
 ## Task 2 - Przeprowadzenie ataku i analiza 
